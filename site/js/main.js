@@ -1,5 +1,3 @@
-var ctx = document.getElementById("passengerDataChart").getContext("2d");
-
 window.chartColors = {
   red: "rgb(255, 99, 132)",
   orange: "rgb(255, 159, 64)",
@@ -10,37 +8,37 @@ window.chartColors = {
   grey: "rgb(201, 203, 207)"
 };
 
-$(document).ready(function() {
+
+function createChart(divName, url, label, dataPropertyX, dataPropertyY) {
+  var ctx = document.getElementById(divName).getContext("2d");
   $.ajax({
     type: "GET",
-    url:
-      "https://rawgit.com/gavinr/stl-lambert-airport-data/master/data/passenger-yearly-totals-data.csv",
+    url: url,
     dataType: "text",
     success: function(csvString) {
       var data = Papa.parse(csvString, {
         header: true
       });
-      console.log("data", data);
 
       var lineChartData = {
         labels: data.data.map(function(row) {
-          return row.Year;
+          return row[dataPropertyX];
         }),
         datasets: [
           {
-            label: "Total Passengers",
+            label: label,
             borderColor: window.chartColors.red,
             backgroundColor: window.chartColors.red,
             fill: false,
             data: data.data.map(function(row) {
-              return row.Total;
+              return row[dataPropertyY];
             }),
             yAxisID: "y-axis-1"
           }
         ]
       };
 
-      var passengerDataChart = Chart.Line(ctx, {
+      Chart.Line(ctx, {
         data: lineChartData,
         options: {
           responsive: true,
@@ -48,7 +46,7 @@ $(document).ready(function() {
           stacked: false,
           title: {
             display: false,
-            text: "Total Passengers Per Year"
+            text: label
           },
           scales: {
             yAxes: [
@@ -73,4 +71,10 @@ $(document).ready(function() {
       });
     }
   });
+}
+
+
+$(document).ready(function() {
+  createChart("passengerDataChart", "https://rawgit.com/gavinr/stl-lambert-airport-data/master/data/passenger-yearly-totals-data.csv", "Total Passengers", "Year", "Total");
+  createChart("totalFlightsAirlinesChart", "https://rawgit.com/gavinr/stl-lambert-airport-data/master/data/flight-takeoffs-and-landings.csv", "Total Flights", "Year", "Airlines");
 });
