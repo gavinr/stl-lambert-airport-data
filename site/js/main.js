@@ -9,72 +9,89 @@ window.chartColors = {
 };
 
 
-function createChart(divName, url, label, dataPropertyX, dataPropertyY) {
+function createChart(divName, dataString, label, dataPropertyX, dataPropertyY) {
   var ctx = document.getElementById(divName).getContext("2d");
-  $.ajax({
+  var data = Papa.parse(dataString, {
+    header: true
+  });
+
+  var lineChartData = {
+    labels: data.data.map(function(row) {
+      return row[dataPropertyX];
+    }),
+    datasets: [
+      {
+        label: label,
+        borderColor: window.chartColors.red,
+        backgroundColor: window.chartColors.red,
+        fill: false,
+        data: data.data.map(function(row) {
+          return row[dataPropertyY];
+        }),
+        yAxisID: "y-axis-1"
+      }
+    ]
+  };
+
+  Chart.Line(ctx, {
+    data: lineChartData,
+    options: {
+      responsive: true,
+      hoverMode: "index",
+      stacked: false,
+      title: {
+        display: false,
+        text: label
+      },
+      scales: {
+        yAxes: [
+          {
+            type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+            display: true,
+            position: "left",
+            id: "y-axis-1",
+            ticks: {
+              beginAtZero: true,
+              userCallback: function(value, index, values) {
+                value = value.toString();
+                value = value.split(/(?=(?:...)*$)/);
+                value = value.join(",");
+                return value;
+              }
+            }
+          }
+        ]
+      }
+    }
+  });
+}
+
+function getData(url) {
+  return $.ajax({
     type: "GET",
     url: url,
     dataType: "text",
-    success: function(csvString) {
-      var data = Papa.parse(csvString, {
-        header: true
-      });
-
-      var lineChartData = {
-        labels: data.data.map(function(row) {
-          return row[dataPropertyX];
-        }),
-        datasets: [
-          {
-            label: label,
-            borderColor: window.chartColors.red,
-            backgroundColor: window.chartColors.red,
-            fill: false,
-            data: data.data.map(function(row) {
-              return row[dataPropertyY];
-            }),
-            yAxisID: "y-axis-1"
-          }
-        ]
-      };
-
-      Chart.Line(ctx, {
-        data: lineChartData,
-        options: {
-          responsive: true,
-          hoverMode: "index",
-          stacked: false,
-          title: {
-            display: false,
-            text: label
-          },
-          scales: {
-            yAxes: [
-              {
-                type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-                display: true,
-                position: "left",
-                id: "y-axis-1",
-                ticks: {
-                  beginAtZero: true,
-                  userCallback: function(value, index, values) {
-                    value = value.toString();
-                    value = value.split(/(?=(?:...)*$)/);
-                    value = value.join(",");
-                    return value;
-                  }
-                }
-              }
-            ]
-          }
-        }
-      });
-    }
   });
 }
 
 
 $(document).ready(function() {
-  createChart("passengerDataChart", "https://rawgit.com/gavinr/stl-lambert-airport-data/master/data/passenger-yearly-totals-data.csv", "Total Passengers", "Year", "Total");
-  createChart("totalFlightsAirlinesChart", "https://rawgit.com/gavinr/stl-lambert-airport-data/master/data/flight-takeoffs-and-landings.csv", "Total Flights", "Year", "Airlines");
+
+  var passengerYearlyTotalsData = getData("https://rawgit.com/gavinr/stl-lambert-airport-data/master/data/passenger-yearly-totals-data.csv");
+  var flightTakeoffsAndLandings = getData("https://rawgit.com/gavinr/stl-lambert-airport-data/master/data/flight-takeoffs-and-landings.csv");
+
+  $.when(
+    passengerYearlyTotalsData,
+    flightTakeoffsAndLandings
+  ).done(function(passengerYearlyTotalsData, flightTakeoffsAndLandings) {
+    console.log('res', passengerYearlyTotalsData, flightTakeoffsAndLandings);
+    passengerYearlyTotalsData = passengerYearlyTotalsData[0];
+    flightTakeoffsAndLandings = flightTakeoffsAndLandings[0];
+    
+    createChart("passengerDataChart", passengerYearlyTotalsData, "Total Passengers", "Year", "Total");
+    createChart("totalFlightsAirlinesChart", flightTakeoffsAndLandings, "Total Flights", "Year", "Airlines");
+
+  });
+
+
 });
