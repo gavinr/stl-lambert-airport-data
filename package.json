@@ -1,0 +1,29 @@
+{
+  "name": "stl-lambert-airport-data",
+  "version": "1.0.0",
+  "description": "Datasets from the St. Louis airport.",
+  "main": "site/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gavinr/stl-lambert-airport-data.git"
+  },
+  "keywords": [
+    "open-data",
+    "airport",
+    "st-louis",
+    "stl",
+    "data"
+  ],
+  "author": "Gavin Rehkemper",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gavinr/stl-lambert-airport-data/issues"
+  },
+  "homepage": "https://github.com/gavinr/stl-lambert-airport-data#readme",
+  "devDependencies": {
+    "prettier": "1.10.2"
+  }
+}
