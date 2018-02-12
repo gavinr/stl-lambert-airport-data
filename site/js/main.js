@@ -1,6 +1,6 @@
 window.chartColors = {
   red: "rgb(255, 99, 132)",
-  orange: "rgb(255, 159, 64)",
+  orange: "rgb(241, 101, 41)",
   yellow: "rgb(255, 205, 86)",
   green: "rgb(75, 192, 192)",
   blue: "rgb(54, 162, 235)",
@@ -50,8 +50,8 @@ function createChart(divName, dataString, label, dataPropertyX, dataPropertyY) {
     datasets: [
       {
         label: label,
-        borderColor: window.chartColors.red,
-        backgroundColor: window.chartColors.red,
+        borderColor: window.chartColors.orange,
+        backgroundColor: window.chartColors.orange,
         fill: false,
         data: data,
         yAxisID: "y-axis-1"
