@@ -11,23 +11,49 @@ window.chartColors = {
 
 function createChart(divName, dataString, label, dataPropertyX, dataPropertyY) {
   var ctx = document.getElementById(divName).getContext("2d");
-  var data = Papa.parse(dataString, {
-    header: true
-  });
+
+  if(typeof(dataString) === "object") {
+    // if we have an array, this is the "passengers per flight"
+    // we should probably refactor this in the future when we want more graphs
+    var data1 = Papa.parse(dataString[0], {
+      header: true
+    });
+    var data2 = Papa.parse(dataString[1], {
+      header: true
+    });
+
+    var labels = data1.data.map(function(row) {
+      return row['Year'];
+    });
+
+    data = data1.data.map(function(row, i) {
+      return row['Total']/data2.data[i]['Airlines'];
+    });
+  } else {
+    var data = Papa.parse(dataString, {
+      header: true
+    });
+
+    var labels = data.data.map(function(row) {
+      return row[dataPropertyX];
+    });
+
+    data = data.data.map(function(row) {
+      return row[dataPropertyY];
+    });
+  }
+  
+
 
   var lineChartData = {
-    labels: data.data.map(function(row) {
-      return row[dataPropertyX];
-    }),
+    labels: labels,
     datasets: [
       {
         label: label,
         borderColor: window.chartColors.red,
         backgroundColor: window.chartColors.red,
         fill: false,
-        data: data.data.map(function(row) {
-          return row[dataPropertyY];
-        }),
+        data: data,
         yAxisID: "y-axis-1"
       }
     ]
@@ -84,12 +110,12 @@ $(document).ready(function() {
     passengerYearlyTotalsData,
     flightTakeoffsAndLandings
   ).done(function(passengerYearlyTotalsData, flightTakeoffsAndLandings) {
-    console.log('res', passengerYearlyTotalsData, flightTakeoffsAndLandings);
     passengerYearlyTotalsData = passengerYearlyTotalsData[0];
     flightTakeoffsAndLandings = flightTakeoffsAndLandings[0];
     
     createChart("passengerDataChart", passengerYearlyTotalsData, "Total Passengers", "Year", "Total");
     createChart("totalFlightsAirlinesChart", flightTakeoffsAndLandings, "Total Flights", "Year", "Airlines");
+    createChart("passengersPerFlightChart", [passengerYearlyTotalsData, flightTakeoffsAndLandings], "Passengers Per Flight");
 
   });
 
