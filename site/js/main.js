@@ -103,8 +103,8 @@ function getData(url) {
 
 $(document).ready(function() {
 
-  var passengerYearlyTotalsData = getData("https://rawgit.com/gavinr/stl-lambert-airport-data/master/data/passenger-yearly-totals-data.csv");
-  var flightTakeoffsAndLandings = getData("https://rawgit.com/gavinr/stl-lambert-airport-data/master/data/flight-takeoffs-and-landings.csv");
+  var passengerYearlyTotalsData = getData("https://cdn.jsdelivr.net/gh/gavinr/stl-lambert-airport-data@master/data/passenger-yearly-totals-data.csv");
+  var flightTakeoffsAndLandings = getData("https://cdn.jsdelivr.net/gh/gavinr/stl-lambert-airport-data@master/data/flight-takeoffs-and-landings.csv");
 
   $.when(
     passengerYearlyTotalsData,
