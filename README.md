@@ -1,6 +1,6 @@
 # St. Louis Lambert International Airport Data
 
-Datasets from the St. Louis airport. There are currently 2 CSV datasets in the `/data` folder:
+Datasets from the St. Louis airport. There are currently 3 CSV datasets in the `/data` folder:
 
 * [Monthly Data](https://github.com/gavinr/stl-lambert-airport-data/blob/master/data/monthly.csv) - monthly data containing Enplaned Passengers, Deplaned Passengers, Aircraft Departures, All Aircraft Operations, Landed Weights (1000-lbs), and Air Cargo (lbs)
     * API Link: `https://cdn.jsdelivr.net/gh/gavinr/stl-lambert-airport-data@master/data/monthly.csv`
