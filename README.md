@@ -1,6 +1,6 @@
 # St. Louis Lambert International Airport Data
 
-Datasets from the St. Louis airport. There are currently 2 CSV datasets in the `/data` folder:
+Datasets from the St. Louis airport. There are currently 3 CSV datasets in the `/data` folder:
 
 * [Passenger Yearly Totals](https://github.com/gavinr/stl-lambert-airport-data/blob/master/data/passenger-yearly-totals-data.csv) - data on total passengers in and out of the airport from 1990-present.
     * API Link: `https://cdn.jsdelivr.net/gh/gavinr/stl-lambert-airport-data@master/data/passenger-yearly-totals-data.csv`
