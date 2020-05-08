@@ -7,17 +7,21 @@
 
   export let data;
   export let title;
-  export let dataPropertyX;
+  export let labels;
   export let dataPropertyY;
 
   let ctx;
 
-  const createChart = (ctx, data, label, dataPropertyX, dataPropertyY) => {
-    var labels = data.map(function(row) {
-      return row[dataPropertyX];
-    });
+  const createChart = (ctx, data, label, labels, dataPropertyY) => {
+    console.log("data", data);
+    console.log("typeof labels", typeof labels);
+    if (typeof labels === "string") {
+      labels = data.map(function (row) {
+        return row[labels];
+      });
+    }
 
-    data = data.map(function(row) {
+    data = data.map(function (row) {
       return row[dataPropertyY];
     });
 
@@ -30,9 +34,9 @@
           backgroundColor: graphColor,
           fill: false,
           data: data,
-          yAxisID: "y-axis-1"
-        }
-      ]
+          yAxisID: "y-axis-1",
+        },
+      ],
     };
 
     Chart.Line(ctx, {
@@ -43,7 +47,7 @@
         stacked: false,
         title: {
           display: false,
-          text: label
+          text: label,
         },
         scales: {
           yAxes: [
@@ -54,36 +58,36 @@
               id: "y-axis-1",
               ticks: {
                 beginAtZero: true,
-                userCallback: function(value, index, values) {
+                userCallback: function (value, index, values) {
                   value = value.toString();
                   value = value.split(/(?=(?:...)*$)/);
                   value = value.join(",");
                   return value;
-                }
-              }
-            }
-          ]
+                },
+              },
+            },
+          ],
         },
         tooltips: {
           callbacks: {
-            label: function(tooltipItem, data) {
+            label: function (tooltipItem, data) {
               var value = data.datasets[0].data[tooltipItem.index];
               value = value.toString();
               value = value.split(/(?=(?:...)*$)/);
               value = value.join(",");
               return value;
-            }
-          }
+            },
+          },
         },
         legend: {
-          display: false
-        }
-      }
+          display: false,
+        },
+      },
     });
   };
 
   onMount(() => {
-    createChart(ctx, data, title, dataPropertyX, dataPropertyY);
+    createChart(ctx, data, title, labels, dataPropertyY);
   });
 </script>
 

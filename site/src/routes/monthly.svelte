@@ -1,10 +1,9 @@
 <script>
-  import Chart from "chart.js";
   import { onMount } from "svelte";
   import Papa from "papaparse";
-  // import csvData from "../../../data/monthly.csv";
+  import Chart from "../components/Chart.svelte";
 
-  let passengers;
+  let totalPassengersData;
 
   const months = [
     "January",
@@ -18,105 +17,54 @@
     "September",
     "October",
     "November",
-    "December"
+    "December",
   ];
 
-  const getChartData = async url => {
-    const response = await fetch(url);
-    const text = await response.text();
-    return Papa.parse(text, {
-      header: true
-    });
+  const getChartData = async (urls) => {
+    if (process.browser) {
+      return Promise.all(
+        urls.map(async (url) => {
+          const response = await fetch(url);
+          const text = await response.text();
+          return Papa.parse(text, {
+            header: true,
+          });
+        })
+      );
+    }
   };
 
   let chartDataPromise;
-  if (process.browser) {
-    // https://github.com/sveltejs/sapper/issues/753
-    chartDataPromise = getChartData(
-      "https://cdn.jsdelivr.net/gh/gavinr/stl-lambert-airport-data@master/data/monthly.csv"
-    );
-  }
-
-  onMount(() => {
-    chartDataPromise.then(chartData => {
-      console.log("chartData:", chartData);
-      const labels = chartData.data.map(obj => {
-        return `${months[obj.Month - 1]} ${obj.Year}`;
-      });
-
-      const totalPassengersData = chartData.data.map(obj => {
-        return obj["Total Passengers"];
-      });
-
-      var myChart = new Chart(passengers.getContext("2d"), {
-        type: "line",
-        data: {
-          labels: labels,
-          datasets: [
-            {
-              label: "Total Passengers",
-              data: totalPassengersData,
-              backgroundColor: "rgba(255, 0, 0, 0.0)",
-              borderColor: "rgba(255, 0, 0, 0.5)"
-            }
-          ]
-        },
-        options: {
-          tooltips: {
-            callbacks: {
-              label: function(tooltipItem, data) {
-                var value = data.datasets[0].data[tooltipItem.index];
-                value = value.toString();
-                value = value.split(/(?=(?:...)*$)/);
-                value = value.join(",");
-                return value;
-              }
-            }
-          },
-          scales: {
-            xAxes: [
-              {
-                ticks: {
-                  autoSkip: true
-                  // maxTicksLimit: 6
-                },
-                afterBuildTicks: res => {
-                  res.ticks = res.ticks.map(tickString => {
-                    if (tickString.indexOf("January") == 0) {
-                      return tickString;
-                    } else {
-                      return "";
-                    }
-                  });
-                }
-              }
-            ],
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  userCallback: function(value, index, values) {
-                    // Convert the number to a string and split the string every 3 charaters from the end
-                    value = value.toString();
-                    value = value.split(/(?=(?:...)*$)/);
-                    value = value.join(",");
-                    return value;
-                  }
-                }
-              }
-            ]
-          }
-        }
-      });
-    });
-  });
+  // https://github.com/sveltejs/sapper/issues/753
+  chartDataPromise = getChartData([
+    "https://cdn.jsdelivr.net/gh/gavinr/stl-lambert-airport-data@master/data/monthly.csv",
+  ]);
 </script>
+
+<style>
+  h2 {
+    margin-top: 100px;
+  }
+</style>
 
 <svelte:head>
   <title>Monthly</title>
 </svelte:head>
 <h1>Monthly</h1>
 
-<p>
-  <canvas class="chart" bind:this={passengers} />
-</p>
+{#await chartDataPromise}
+  <p>...waiting</p>
+{:then chartData}
+  <h2>Total Passengers</h2>
+  <p>
+    <Chart
+      data={chartData[0].data}
+      title="Total Passengers"
+      labels={chartData[0].data.map((o) => {
+        return `${months[o.Month - 1]} ${o.Year}`;
+      })}
+      dataPropertyY="Total Passengers" />
+  </p>
+{:catch error}
+  <p>Error getting data. Please try again later.</p>
+{/await}
