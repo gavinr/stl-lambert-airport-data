@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import Papa from "papaparse";
-  import Chart from "../components/Chart.svelte";
+  import ChartBasicLine from "../components/ChartBasicLine.svelte";
 
   let totalPassengersData;
 
@@ -42,8 +42,8 @@
 </script>
 
 <style>
-  h2 {
-    margin-top: 100px;
+  .chartWrapper {
+    margin-bottom: 100px;
   }
 </style>
 
@@ -53,11 +53,11 @@
 <h1>Monthly</h1>
 
 {#await chartDataPromise}
-  <p>...waiting</p>
+  <p>Getting data ...</p>
 {:then chartData}
   <h2>Total Passengers</h2>
-  <p>
-    <Chart
+  <p class="chartWrapper">
+    <ChartBasicLine
       data={chartData[0].data}
       title="Total Passengers"
       labels={chartData[0].data.map((o) => {

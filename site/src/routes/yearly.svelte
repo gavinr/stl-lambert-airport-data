@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import Papa from "papaparse";
-  import Chart from "../components/Chart.svelte";
+  import ChartBasicLine from "../components/ChartBasicLine.svelte";
 
   let totalPassengersData;
 
@@ -28,8 +28,8 @@
 </script>
 
 <style>
-  h2 {
-    margin-top: 100px;
+  .chartWrapper {
+    margin-bottom: 100px;
   }
 </style>
 
@@ -39,11 +39,11 @@
 <h1>Yearly</h1>
 
 {#await chartDataPromise}
-  <p>...waiting</p>
+  <p>Getting data ...</p>
 {:then chartData}
   <h2>Total Passengers</h2>
-  <p>
-    <Chart
+  <p class="chartWrapper">
+    <ChartBasicLine
       data={chartData[0].data}
       title="Total Passengers"
       labels="Year"
@@ -51,8 +51,8 @@
   </p>
 
   <h2>Total Flights</h2>
-  <p>
-    <Chart
+  <p class="chartWrapper">
+    <ChartBasicLine
       data={chartData[1].data}
       title="Total Flights"
       labels="Year"
@@ -60,8 +60,8 @@
   </p>
 
   <h2>Passengers Per Flight</h2>
-  <p>
-    <Chart
+  <p class="chartWrapper">
+    <ChartBasicLine
       data={chartData[0].data.map(function (row, i) {
         return { Year: row['Year'], Total: row['Total'] / chartData[1].data[i]['Airlines'] };
       })}
