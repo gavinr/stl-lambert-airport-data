@@ -27,4 +27,4 @@ jobs:
       with:
         ACCESS_TOKEN: ${{ secrets.gh_pat }}
         BRANCH: gh-pages
-        FOLDER: site/__sapper__/export/repo-name
+        FOLDER: site/__sapper__/export/stl-lambert-airport-data
