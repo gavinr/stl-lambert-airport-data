@@ -31,8 +31,8 @@
 
 <p>
   Check out our
-  <a href="/monthly">monthly</a>
+  <a href="monthly">monthly</a>
   and
-  <a href="/yearly">yearly</a>
+  <a href="yearly">yearly</a>
   data pages.
 </p>
