@@ -52,24 +52,24 @@
   <ul>
     <li>
       <a aria-current={segment === undefined ? 'page' : undefined} href=".">
-        home
+        Home
       </a>
     </li>
     <li>
       <a
         aria-current={segment === 'monthly' ? 'page' : undefined}
         href="monthly">
-        monthly
+        Monthly
       </a>
     </li>
     <li>
       <a aria-current={segment === 'yearly' ? 'page' : undefined} href="yearly">
-        yearly
+        Yearly
       </a>
     </li>
     <li>
       <a aria-current={segment === 'about' ? 'page' : undefined} href="about">
-        about
+        About
       </a>
     </li>
   </ul>

@@ -13,8 +13,7 @@
   let ctx;
 
   const createChart = (ctx, data, label, labels, dataPropertyY) => {
-    console.log("data", data);
-    console.log("typeof labels", typeof labels);
+    // console.log("data", data);
     if (typeof labels === "string") {
       labels = data.map(function (row) {
         return row[labels];
