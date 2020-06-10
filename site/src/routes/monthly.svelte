@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import Papa from "papaparse";
-  import ChartBasicLine from "../components/ChartBasicLine.svelte";
+  import ChartMonthly from "../components/ChartMonthly.svelte";
 
   let totalPassengersData;
 
@@ -57,12 +57,10 @@
 {:then chartData}
   <h2>Total Passengers</h2>
   <p class="chartWrapper">
-    <ChartBasicLine
+    <ChartMonthly
       data={chartData[0].data}
       title="Total Passengers"
-      labels={chartData[0].data.map((o) => {
-        return `${months[o.Month - 1]} ${o.Year}`;
-      })}
+      labels={months}
       dataPropertyY="Total Passengers" />
   </p>
 {:catch error}

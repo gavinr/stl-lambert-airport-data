@@ -15,4 +15,7 @@ polka() // You can also use Express
 	)
 	.listen(PORT, err => {
 		if (err) console.log('error', err);
+		console.log(
+			"check out http://localhost:" + PORT + "/stl-lambert-airport-data"
+		);
 	});
