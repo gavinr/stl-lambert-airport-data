@@ -14,3 +14,6 @@
   <a href="https://github.com/gavinr/stl-lambert-airport-data">GitHub page</a>
   .
 </p>
+<p>
+  This site built and maintained by <a href="https://gavinr.com">Gavin Rehkemper</a>.
+</p>
