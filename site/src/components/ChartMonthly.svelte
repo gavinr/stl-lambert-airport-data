@@ -13,18 +13,11 @@
   let ctx;
 
   const createChart = (ctx, data, label, labels, dataPropertyY) => {
-    console.log("dataPropertyY", dataPropertyY);
-
     if (typeof labels === "string") {
       labels = data.map(function (row) {
         return row[labels];
       });
     }
-
-    // data = data.map(function (row) {
-    //   return row[dataPropertyY];
-    // });
-    console.log("data", data);
 
     const dataArraysObject = data.reduce((acc, cur) => {
       if (cur.Year && cur.Year !== "") {
@@ -36,14 +29,11 @@
       return acc;
     }, {});
 
-    console.log("dataArraysObject", dataArraysObject);
-
     // https://colorbrewer2.org/?type=qualitative&scheme=Paired&n=5
     const colors = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99"];
 
     const dataSets = Object.keys(dataArraysObject).map((key, i) => {
       const arr = dataArraysObject[key];
-      console.log("label", label);
       return {
         label: key,
         borderColor: colors[i],
@@ -53,8 +43,6 @@
         yAxisID: "y-axis-1",
       };
     });
-
-    console.log("dataSets", dataSets);
 
     var lineChartData = {
       labels: labels,
