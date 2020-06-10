@@ -63,6 +63,24 @@
       labels={months}
       dataPropertyY="Total Passengers" />
   </p>
+
+  <h2>Aircraft Departures (Passenger)</h2>
+  <p class="chartWrapper">
+    <ChartMonthly
+      data={chartData[0].data}
+      title="Aircraft Departures (Passenger)"
+      labels={months}
+      dataPropertyY="Aircraft Departures (Passenger)" />
+  </p>
+
+  <h2>Aircraft Departures (Cargo)</h2>
+  <p class="chartWrapper">
+    <ChartMonthly
+      data={chartData[0].data}
+      title="Aircraft Departures (Cargo)"
+      labels={months}
+      dataPropertyY="Aircraft Departures (Cargo)" />
+  </p>
 {:catch error}
   <p>Error getting data. Please try again later.</p>
 {/await}
