@@ -10,3 +10,12 @@ Datasets from the St. Louis airport. There are currently 3 CSV datasets in the `
     * API Link: `https://cdn.jsdelivr.net/gh/gavinr/stl-lambert-airport-data@master/data/flight-takeoffs-and-landings.csv`
 
 All data from [https://www.flystl.com/about-us/public-notices-and-reports](https://www.flystl.com/about-us/public-notices-and-reports). Raw data [archived](https://github.com/gavinr/stl-lambert-airport-data/tree/master/raw_data).
+
+## Thanks
+
+Thanks to the following projects for making this project possible:
+
+- [chart.js](https://www.chartjs.org/)
+- [JSDelivr](https://www.jsdelivr.com/)
+- [Papaparse](https://www.papaparse.com/)
+- [Svelte](https://svelte.dev/)/[Sapper](https://sapper.svelte.dev)
