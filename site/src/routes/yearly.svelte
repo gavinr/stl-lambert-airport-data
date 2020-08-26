@@ -1,23 +1,6 @@
 <script>
-  import { onMount } from "svelte";
-  import Papa from "papaparse";
+  import { getChartData } from "../utils.js";
   import ChartBasicLine from "../components/ChartBasicLine.svelte";
-
-  let totalPassengersData;
-
-  const getChartData = async (urls) => {
-    if (process.browser) {
-      return Promise.all(
-        urls.map(async (url) => {
-          const response = await fetch(url);
-          const text = await response.text();
-          return Papa.parse(text, {
-            header: true,
-          });
-        })
-      );
-    }
-  };
 
   let chartDataPromise;
   // https://github.com/sveltejs/sapper/issues/753
