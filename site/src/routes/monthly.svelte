@@ -1,38 +1,7 @@
 <script>
   import { onMount } from "svelte";
-  import Papa from "papaparse";
+  import { getChartData, months } from "../utils.js";
   import ChartMonthly from "../components/ChartMonthly.svelte";
-
-  let totalPassengersData;
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const getChartData = async (urls) => {
-    if (process.browser) {
-      return Promise.all(
-        urls.map(async (url) => {
-          const response = await fetch(url);
-          const text = await response.text();
-          return Papa.parse(text, {
-            header: true,
-          });
-        })
-      );
-    }
-  };
 
   let chartDataPromise;
   // https://github.com/sveltejs/sapper/issues/753
@@ -48,14 +17,14 @@
 </style>
 
 <svelte:head>
-  <title>Monthly</title>
+  <title>St. Louis Lambert Airport - Monthly Statistics</title>
 </svelte:head>
-<h1>Monthly</h1>
+<h1>St. Louis Lambert Airport - Monthly Statistics</h1>
 
 {#await chartDataPromise}
   <p>Getting data ...</p>
 {:then chartData}
-  <h2>Total Passengers</h2>
+  <h3>Total Passengers</h3>
   <p class="chartWrapper">
     <ChartMonthly
       data={chartData[0].data}
@@ -64,20 +33,31 @@
       dataPropertyY="Total Passengers" />
   </p>
 
-  <h2>Aircraft Departures (Passenger)</h2>
+  <h3>Passenger Aircraft Departures</h3>
   <p class="chartWrapper">
     <ChartMonthly
       data={chartData[0].data}
-      title="Aircraft Departures (Passenger)"
+      title="Passenger Aircraft Departures"
       labels={months}
       dataPropertyY="Aircraft Departures (Passenger)" />
   </p>
 
-  <h2>Aircraft Departures (Cargo)</h2>
+  <h2>Cargo</h2>
+
+  <h3>Air Cargo (lbs)</h3>
   <p class="chartWrapper">
     <ChartMonthly
       data={chartData[0].data}
-      title="Aircraft Departures (Cargo)"
+      title="Air Cargo (lbs)"
+      labels={months}
+      dataPropertyY="Air Cargo (lbs)" />
+  </p>
+
+  <h3>Cargo Aircraft Departures</h3>
+  <p class="chartWrapper">
+    <ChartMonthly
+      data={chartData[0].data}
+      title="Cargo Aircraft Departures"
       labels={months}
       dataPropertyY="Aircraft Departures (Cargo)" />
   </p>
