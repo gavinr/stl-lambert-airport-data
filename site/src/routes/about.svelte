@@ -11,8 +11,7 @@
   </a>
   . To use the data yourself, or to log an issue or comment about this site,
   please see the
-  <a href="https://github.com/gavinr/stl-lambert-airport-data">GitHub page</a>
-  .
+  <a href="https://github.com/gavinr/stl-lambert-airport-data">GitHub page</a>.
 </p>
 <p>
   This site built and maintained by <a href="https://gavinr.com">Gavin Rehkemper</a>.
