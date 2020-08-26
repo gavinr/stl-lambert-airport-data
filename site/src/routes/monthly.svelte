@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte";
   import { getChartData, months } from "../utils.js";
   import ChartMonthly from "../components/ChartMonthly.svelte";
 

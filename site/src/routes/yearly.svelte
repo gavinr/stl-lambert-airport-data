@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte";
   import { getChartData } from "../utils.js";
   import ChartBasicLine from "../components/ChartBasicLine.svelte";
 
