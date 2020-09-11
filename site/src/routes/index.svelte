@@ -24,6 +24,7 @@
   }
   p.right {
     text-align: right;
+    font-weight: bold;
   }
 
   h1 {
