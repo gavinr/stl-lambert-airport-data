@@ -29,8 +29,8 @@
       return acc;
     }, {});
 
-    // https://colorbrewer2.org/?type=qualitative&scheme=Paired&n=5
-    const colors = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99"];
+    // https://colorbrewer2.org/?type=qualitative&scheme=Paired&n=6
+    const colors = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c"];
 
     const dataSets = Object.keys(dataArraysObject).map((key, i) => {
       const arr = dataArraysObject[key];
