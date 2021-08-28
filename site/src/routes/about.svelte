@@ -2,7 +2,7 @@
   <title>About</title>
 </svelte:head>
 
-<h1>About</h1>
+<h1>About - St. Louis Lambert Airport Statistics</h1>
 
 <p>
   This site features visualizations of the open data of the
