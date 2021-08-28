@@ -1,17 +1,15 @@
 import Papa from "papaparse";
 
 const getChartData = async (urls) => {
-  if (process.browser) {
-    return Promise.all(
-      urls.map(async (url) => {
-        const response = await fetch(url);
-        const text = await response.text();
-        return Papa.parse(text, {
-          header: true,
-        });
-      })
-    );
-  }
+  return Promise.all(
+    urls.map(async (url) => {
+      const response = await fetch(url);
+      const text = await response.text();
+      return Papa.parse(text, {
+        header: true,
+      });
+    })
+  );
 };
 
 const months = [
