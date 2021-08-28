@@ -1,5 +1,5 @@
 <script>
-    import { getChartData, months } from "$lib/utils.js";
+    import { getChartData, months } from "$lib/chartDataUtils";
     import ChartMonthly from "../components/ChartMonthly.svelte";
     import ChartBasicLine from "../components/ChartBasicLine.svelte";
   

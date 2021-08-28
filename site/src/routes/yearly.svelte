@@ -1,5 +1,5 @@
 <script>
-    import { getChartData } from "$lib/utils.js";
+    import { getChartData } from "$lib/chartDataUtils";
 
     import ChartBasicLine from "../components/ChartBasicLine.svelte";
   
