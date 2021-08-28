@@ -1,7 +1,6 @@
 name: Build and Deploy
 defaults:
   run:
-    shell: bash
     working-directory: site
 on:
   push:
