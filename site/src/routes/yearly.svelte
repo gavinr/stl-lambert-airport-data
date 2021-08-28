@@ -18,7 +18,7 @@
   </style>
   
   <svelte:head>
-    <title>Yearly</title>
+    <title>St. Louis Lambert Airport - Yearly Statistics</title>
   </svelte:head>
   <h1>Yearly</h1>
   
