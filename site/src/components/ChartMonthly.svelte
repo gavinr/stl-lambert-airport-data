@@ -53,6 +53,7 @@
         type: 'line',
         data: lineChartData,
         options: {
+          responsive: true,
           scales: {
             y:
               {
