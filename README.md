@@ -20,4 +20,4 @@ Thanks to the following projects for making this project possible:
 - [chart.js](https://www.chartjs.org/)
 - [JSDelivr](https://www.jsdelivr.com/)
 - [Papaparse](https://www.papaparse.com/)
-- [Svelte](https://svelte.dev/)/[Sapper](https://sapper.svelte.dev)
+- [SvelteKit](https://kit.svelte.dev/)
