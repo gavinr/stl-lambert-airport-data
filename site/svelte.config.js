@@ -7,10 +7,10 @@ const config = {
 	// for more information about preprocessors
 	preprocess: preprocess(),
 
-	paths: {
-		base: '/stl-lambert-airport-data',
-	},
 	kit: {
+		paths: {
+			base: '/stl-lambert-airport-data',
+		},
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
 		adapter: adapter({})
