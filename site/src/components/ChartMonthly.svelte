@@ -41,7 +41,6 @@
           data: arr,
           yAxisID: "y",
           lineTension: 0.4
-          
         };
       });
   
@@ -54,36 +53,12 @@
         type: 'line',
         data: lineChartData,
         options: {
-          responsive: true,
-          
-          // hoverMode: "index",
-          // stacked: false,
-          plugins: {
-            title: {
-              display: false,
-              text: label,
-            },
-            legend: {
-              display: true,
-            },
-          },
           scales: {
-            y: {
-              type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-              display: true,
-              position: "left",
-              beginAtZero: true,
-              
-              ticks: {
-                callback: function (value, index, values) {
-                  let retValue = value.toString();
-                  const retValueArr = retValue.split(/(?=(?:...)*$)/);
-                  retValue = retValueArr.join(",");
-                  return retValue;
-                },
+            y:
+              {
+                beginAtZero: true
               },
-            },
-          }
+          },
         }
       });
     };

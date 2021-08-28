@@ -45,24 +45,7 @@
         data: lineChartData,
         options: {
           responsive: true,
-          // hoverMode: "index",
-          // stacked: false,
           plugins: {
-            title: {
-              display: false,
-              text: label,
-            },
-            tooltip: {
-              callbacks: {
-                label: function (tooltipItem, data) {
-                  var value = data.datasets[0].data[tooltipItem.index];
-                  value = value.toString();
-                  value = value.split(/(?=(?:...)*$)/);
-                  value = value.join(",");
-                  return value;
-                },
-              },
-            },
             legend: {
               display: false,
             },
@@ -70,18 +53,7 @@
           scales: {
             y:
               {
-                type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-                display: true,
-                position: "left",
-                beginAtZero: true,
-                ticks: {
-                  callback: function (value, index, values) {
-                    let retValue = value.toString();
-                    const retValueArr = retValue.split(/(?=(?:...)*$)/);
-                    retValue = retValueArr.join(",");
-                    return retValue;
-                  },
-                },
+                beginAtZero: true
               },
           },
         },
