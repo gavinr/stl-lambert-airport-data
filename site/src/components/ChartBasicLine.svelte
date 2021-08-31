@@ -1,6 +1,6 @@
 <script>
     import { Chart, registerables } from "chart.js";
-    Chart.register(...registerables);
+    
     
     import { onMount } from "svelte";
   
@@ -14,6 +14,7 @@
     let ctx;
   
     const createChart = (ctx, data, label, labels, dataPropertyY) => {
+      Chart.register(...registerables);
       // console.log("data", data);
       if (typeof labels === "string") {
         labels = data.map(function (row) {
@@ -24,7 +25,7 @@
       data = data.map(function (row) {
         return row[dataPropertyY];
       });
-  
+
       var lineChartData = {
         labels: labels,
         datasets: [
