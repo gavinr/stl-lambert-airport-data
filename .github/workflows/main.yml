@@ -17,6 +17,14 @@ jobs:
     - run: npm install
     - run: npm run build
     - run: ls
+    - name: Generate screeenshot (optional)
+        working-directory: site/build
+        continue-on-error: true
+        run: |
+          npm install --global pageres-cli
+          npm install --global serve
+          serve . -p 5000 &
+          pageres http://localhost:5000 1024x768 --filename=screenshot
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
