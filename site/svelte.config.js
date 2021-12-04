@@ -9,11 +9,12 @@ const config = {
 
 	kit: {
 		paths: {
-			base: '/stl-lambert-airport-data',
+			base: '/stl-lambert-airport-data'
 		},
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
-		adapter: adapter({})
+		adapter: adapter({}),
+		trailingSlash: 'always'
 	}
 };
 
