@@ -1,22 +1,27 @@
 <script>
 	import { page } from '$app/stores';
+	import { base, assets } from '$app/paths';
 </script>
 
 <nav>
 	<ul>
 		<li>
-			<a aria-current={$page.path === '/' ? 'page' : undefined} href="/"> Home </a>
+			<a aria-current={$page.path === '/' ? 'page' : undefined} href={`${base}/`}> Home </a>
 		</li>
 		<li>
-			<a aria-current={$page.path === '/monthly' ? 'page' : undefined} href="/monthly/">
+			<a aria-current={$page.path === '/monthly' ? 'page' : undefined} href={`${base}/monthly/`}>
 				Monthly
 			</a>
 		</li>
 		<li>
-			<a aria-current={$page.path === '/yearly' ? 'page' : undefined} href="/yearly/"> Yearly </a>
+			<a aria-current={$page.path === '/yearly' ? 'page' : undefined} href={`${base}/yearly/`}>
+				Yearly
+			</a>
 		</li>
 		<li>
-			<a aria-current={$page.path === '/about' ? 'page' : undefined} href="/about/"> About </a>
+			<a aria-current={$page.path === '/about' ? 'page' : undefined} href={`${base}/about/`}>
+				About
+			</a>
 		</li>
 	</ul>
 </nav>
