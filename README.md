@@ -1,6 +1,6 @@
 # St. Louis Lambert International Airport Data
 
-Datasets from the St. Louis airport. Browse the data on this website: https://gavinr.github.io/stl-lambert-airport-data/
+Datasets from the St. Louis airport. Browse the data on this website: https://stlairportdata.com/
 
 There are currently 3 CSV datasets in the `/data` folder:
 
